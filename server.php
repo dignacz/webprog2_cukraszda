@@ -14,6 +14,7 @@ $db = mysqli_connect('localhost', 'root', '', 'webprog2_cukraszda');
 if(!$db){
   die("Error: Failed to connect to database!");
 }
+mysqli_set_charset($db,'utf8');
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {

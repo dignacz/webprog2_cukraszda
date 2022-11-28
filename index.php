@@ -46,10 +46,13 @@ session_start();
           <a class="nav-link" href="index.php?page=hiroldal">Híroldal</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="index.php?page=mysoap">My SOAP</a>
+          <a class="nav-link" href="index.php?page=hiroldal#ujhirfelvitel">Új hír</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="index.php?page=mnbsoap">MNB SOAP</a>
+          <a class="nav-link" href="soap/kliens/kliens.php">Cukrászda SOAP</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.php?page=mnbsoap">MNB</a>
         </li>
       </ul>
       <!-- Left links -->
@@ -58,7 +61,8 @@ session_start();
       <?php
       
       if (isset($_SESSION['username'])) {
-        $myConnection= mysqli_connect('localhost', 'root', '', 'webprog2_cukraszda') or die ("could not connect to mysql"); 
+        $myConnection= mysqli_connect('localhost', 'root', '', 'webprog2_cukraszda') or die ("could not connect to mysql");
+        mysqli_set_charset($myConnection,'utf8'); 
         $sqlCommand="SELECT * FROM `users` WHERE `username` = '{$_SESSION['username']}'";
         $query=mysqli_query($myConnection, $sqlCommand) or die(mysqli_error($myConnection));
         $show=mysqli_fetch_assoc($query);
