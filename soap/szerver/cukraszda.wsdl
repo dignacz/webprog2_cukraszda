@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap-env="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://localhost/webprog2_cukraszda/soap/szerver/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/webprog2_cukraszda/soap/szerver/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://localhost/webprog2_cukraszda/soap/szerver/">
+      <xsd:complexType name="Tipusok">
+        <xsd:all>
+          <xsd:element name="hibakod" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="uzenet" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="tipusok" type="tns:TipusArray" minOccurs="0" maxOccurs="1"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Tipus">
+        <xsd:all>
+          <xsd:element name="tipus" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Sutik">
+        <xsd:all>
+          <xsd:element name="hibakod" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="uzenet" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="tipus" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="sutik" type="tns:SutiArray" minOccurs="0" maxOccurs="1"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Suti">
+        <xsd:all>
+          <xsd:element name="nev" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Arak">
+        <xsd:all>
+          <xsd:element name="hibakod" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="uzenet" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="arak" type="tns:ArArray" minOccurs="0" maxOccurs="1"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Ar">
+        <xsd:all>
+          <xsd:element name="ertek" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="egyseg" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="gettipusRequest"/>
+  <wsdl:message name="gettipusResponse">
+    <wsdl:part name="gettipusReturn" type="tns:Tipusok"/>
+  </wsdl:message>
+  <wsdl:message name="getsutiRequest">
+    <wsdl:part name="tipus" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="getsutiResponse">
+    <wsdl:part name="getsutiReturn" type="tns:Sutik"/>
+  </wsdl:message>
+  <wsdl:message name="getarRequest">
+    <wsdl:part name="nev" type="xsd:string"/>
+    <wsdl:part name="tipus" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="getarResponse">
+    <wsdl:part name="getarReturn" type="tns:Arak"/>
+  </wsdl:message>
+  <wsdl:portType name="CukraszdaPortType">
+    <wsdl:operation name="gettipus">
+      <wsdl:documentation/>
+      <wsdl:input message="tns:gettipusRequest"/>
+      <wsdl:output message="tns:gettipusResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getsuti">
+      <wsdl:documentation/>
+      <wsdl:input message="tns:getsutiRequest"/>
+      <wsdl:output message="tns:getsutiResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getar">
+      <wsdl:documentation/>
+      <wsdl:input message="tns:getarRequest"/>
+      <wsdl:output message="tns:getarResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CukraszdaBinding" type="tns:CukraszdaPortType">
+    <soap-env:binding xmlns="http://schemas.xmlsoap.org/wsdl/soap/" style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="gettipus">
+      <soap-env:operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://localhost/webprog2_cukraszda/soap/szerver/szerver.php?method=gettipus" style="rpc"/>
+      <wsdl:input>
+        <soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getsuti">
+      <soap-env:operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://localhost/webprog2_cukraszda/soap/szerver/szerver.php?method=getsuti" style="rpc"/>
+      <wsdl:input>
+        <soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getar">
+      <soap-env:operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://localhost/webprog2_cukraszda/soap/szerver/szerver.php?method=getar" style="rpc"/>
+      <wsdl:input>
+        <soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Cukraszda">
+    <wsdl:documentation/>
+    <wsdl:port name="CukraszdaPort" binding="tns:CukraszdaBinding">
+      <soap-env:address location="http://localhost/webprog2_cukraszda/soap/szerver/szerver.php"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
